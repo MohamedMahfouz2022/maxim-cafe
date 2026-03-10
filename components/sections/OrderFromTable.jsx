@@ -182,7 +182,7 @@ export default function OrderFromTable() {
                   whileTap={{ scale: 0.97 }}
                   className="cursor-pointer inline-block text-orange-400 hover:text-orange-300 text-sm font-bold underline underline-offset-4 transition-colors"
                 >
-                  ↑ روح اختار من المنيو
+                  <span>روح اختار من المنيو</span><span> ↑ </span>
                 </motion.span>
               </Link>
             </motion.div>

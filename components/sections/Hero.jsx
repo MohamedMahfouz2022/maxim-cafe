@@ -72,15 +72,16 @@ export default function Hero() {
         {/* العنوان */}
         <motion.h1
           variants={itemVariants}
-          className="text-5xl sm:text-7xl md:text-8xl font-black mb-6 leading-tight"
+          className="flex  flex-col gap-2 text-5xl sm:text-7xl md:text-8xl font-black mb-6 leading-tight"
         >
-          <span className="text-white">كافيه </span>
-          <span className="text-transparent" style={{ WebkitTextStroke: "2px #f97316" }}>
-            MAXIM
-          </span>
-          <br />
-          <span className="text-orange-500">تجربة</span>
-          <span className="text-white"> لا تُنسى</span>
+          <div>
+            <span className="text-white">كافيه </span>
+            <span className="text-transparent" style={{ WebkitTextStroke: "2px #f97316" }}>MAXIM</span>
+          </div>
+          <div>
+            <span className="text-orange-500">تجربة</span>
+            <span className="text-white"> لا تُنسى</span>
+          </div>
         </motion.h1>
 
         {/* الوصف */}
