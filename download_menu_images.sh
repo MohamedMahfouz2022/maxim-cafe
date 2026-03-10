@@ -1,0 +1,18 @@
+#!/bin/bash
+mkdir -p public/images/menu
+curl -L -o public/images/menu/espresso.jpg "https://images.unsplash.com/photo-1510707577719-ae7c14805e3a?w=400&q=80"
+curl -L -o public/images/menu/cappuccino.jpg "https://images.unsplash.com/photo-1517701604599-bb29b565090c?w=400&q=80"
+curl -L -o public/images/menu/latte.jpg "https://images.unsplash.com/photo-1570968915860-54d5c301fa9f?w=400&q=80"
+curl -L -o public/images/menu/americano.jpg "https://images.unsplash.com/photo-1551030173-122aabc4489c?w=400&q=80"
+curl -L -o public/images/menu/mocha.jpg "https://images.unsplash.com/photo-1578314675249-a6910f80cc4e?w=400&q=80"
+curl -L -o public/images/menu/frappuccino.jpg "https://images.unsplash.com/photo-1461023058943-07fcbe16d735?w=400&q=80"
+curl -L -o public/images/menu/iced-latte.jpg "https://images.unsplash.com/photo-1485808191679-5f86510df729?w=400&q=80"
+curl -L -o public/images/menu/orange-mojito.jpg "https://images.unsplash.com/photo-1497534446932-c925b458314e?w=400&q=80"
+curl -L -o public/images/menu/lemonade.jpg "https://images.unsplash.com/photo-1523371054106-bbf80586c691?w=400&q=80"
+curl -L -o public/images/menu/cheese-croissant.jpg "https://images.unsplash.com/photo-1555507036-ab1f4038808a?w=400&q=80"
+curl -L -o public/images/menu/cream-pasta.jpg "https://images.unsplash.com/photo-1473093226795-af9932fe5856?w=400&q=80"
+curl -L -o public/images/menu/chicken-sandwich.jpg "https://images.unsplash.com/photo-1568901346375-23c9450c58cd?w=400&q=80"
+curl -L -o public/images/menu/honey-waffle.jpg "https://images.unsplash.com/photo-1562376552-0d160a2f238d?w=400&q=80"
+curl -L -o public/images/menu/cheesecake.jpg "https://images.unsplash.com/photo-1533134242443-d4fd215305ad?w=400&q=80"
+curl -L -o public/images/menu/brownie.jpg "https://images.unsplash.com/photo-1606312619070-d48b4c652a52?w=400&q=80"
+curl -L -o public/images/menu/tiramisu.jpg "https://images.unsplash.com/photo-1571877227200-a0d98ea607e9?w=400&q=80"

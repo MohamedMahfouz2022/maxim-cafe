@@ -37,7 +37,7 @@ export default function CartSummary({ items, total, onRemove, ctaLabel, onCta, d
               className="flex items-center justify-between bg-zinc-800 rounded-xl px-4 py-3"
             >
               <div className="min-w-0">
-                <p className="font-bold text-sm truncate">{item.emoji} {item.name}</p>
+                <p className="font-bold text-sm truncate">{item.name}</p>
                 <p className="text-zinc-500 text-xs">× {item.qty} = {item.price * item.qty} ج</p>
               </div>
               <motion.button

@@ -90,7 +90,6 @@ export default function Menu() {
                 className="flex items-center justify-between bg-zinc-800 rounded-xl px-4 py-3"
               >
                 <div className="flex items-center gap-2 sm:gap-3 min-w-0">
-                  <span>{item.emoji}</span>
                   <span className="font-semibold text-sm sm:text-base truncate">{item.name}</span>
                   <span className="text-zinc-500 text-xs sm:text-sm shrink-0">× {item.qty}</span>
                 </div>
