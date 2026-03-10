@@ -11,13 +11,14 @@ import { menuData, menuCategories } from "../../data/menuData";
 import { useCart } from "../../context/CartContext";
 import MenuCard from "../ui/MenuCard";
 import CategoryTabs from "../ui/CategoryTabs";
+import Link from "next/link";
 
 const sectionVariants = {
   hidden: { opacity: 0, y: 50 },
   visible: { opacity: 1, y: 0, transition: { duration: 0.7, ease: [0.22, 1, 0.36, 1] } },
 };
 
-export default function Menu({ onNavigateToOrder }) {
+export default function Menu() {
   const [activeCategory, setActiveCategory] = useState(menuCategories[0]);
   const { items: cart, addItem, removeItem, total } = useCart();
 
@@ -111,14 +112,15 @@ export default function Menu({ onNavigateToOrder }) {
             <span className="text-lg sm:text-xl font-black">
               الإجمالي: <span className="text-orange-500">{total} ج</span>
             </span>
-            <motion.button
-              whileHover={{ scale: 1.05, boxShadow: "0 0 20px rgba(249,115,22,0.3)" }}
-              whileTap={{ scale: 0.97 }}
-              onClick={onNavigateToOrder}
-              className="cursor-pointer w-full sm:w-auto bg-orange-500 hover:bg-orange-400 text-black font-bold px-8 py-3 rounded-full transition-colors duration-200"
-            >
-              ابعت الطلب على واتساب ←
-            </motion.button>
+            <Link href="/order" className="w-full sm:w-auto">
+              <motion.button
+                whileHover={{ scale: 1.05, boxShadow: "0 0 20px rgba(249,115,22,0.3)" }}
+                whileTap={{ scale: 0.97 }}
+                className="cursor-pointer w-full bg-orange-500 hover:bg-orange-400 text-black font-bold px-8 py-3 rounded-full transition-colors duration-200"
+              >
+                ابعت الطلب على واتساب ←
+              </motion.button>
+            </Link>
           </div>
         </motion.div>
       )}

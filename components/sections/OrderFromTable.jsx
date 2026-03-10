@@ -11,6 +11,7 @@ import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { useCart } from "../../context/CartContext";
 import CartSummary from "../ui/CartSummary";
+import Link from "next/link";
 
 // رقم الواتساب مع كود الدولة (مصر +20)
 const WHATSAPP_NUMBER = "201013495432";
@@ -175,14 +176,15 @@ export default function OrderFromTable() {
               transition={{ delay: 0.5 }}
               className="mt-6 text-center"
             >
-              <motion.button
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.97 }}
-                onClick={() => document.getElementById("menu")?.scrollIntoView({ behavior: "smooth" })}
-                className="cursor-pointer text-orange-400 hover:text-orange-300 text-sm font-bold underline underline-offset-4 transition-colors"
-              >
-                ↑ روح اختار من المنيو
-              </motion.button>
+              <Link href="/menu">
+                <motion.span
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.97 }}
+                  className="cursor-pointer inline-block text-orange-400 hover:text-orange-300 text-sm font-bold underline underline-offset-4 transition-colors"
+                >
+                  ↑ روح اختار من المنيو
+                </motion.span>
+              </Link>
             </motion.div>
           )}
         </motion.div>

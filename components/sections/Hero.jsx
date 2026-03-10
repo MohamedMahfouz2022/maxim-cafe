@@ -6,6 +6,7 @@
 "use client";
 
 import { motion } from "framer-motion";
+import Link from "next/link";
 
 const containerVariants = {
   hidden: {},
@@ -23,7 +24,7 @@ const STATS = [
   { num: "٥★", label: "تقييم العملاء" },
 ];
 
-export default function Hero({ onNavigate }) {
+export default function Hero() {
   return (
     <section
       id="home"
@@ -96,22 +97,24 @@ export default function Hero({ onNavigate }) {
           variants={itemVariants}
           className="flex flex-col sm:flex-row gap-4 justify-center"
         >
-          <motion.button
-            whileHover={{ scale: 1.05, boxShadow: "0 0 30px rgba(249,115,22,0.5)" }}
-            whileTap={{ scale: 0.97 }}
-            onClick={() => onNavigate("menu")}
-            className="cursor-pointer bg-orange-500 hover:bg-orange-400 text-black font-bold px-10 py-4 rounded-full text-base sm:text-lg transition-colors duration-300"
-          >
-            🍽️ شوف المنيو
-          </motion.button>
-          <motion.button
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.97 }}
-            onClick={() => onNavigate("order")}
-            className="cursor-pointer bg-transparent border-2 border-orange-500 text-orange-400 hover:bg-orange-500 hover:text-black font-bold px-10 py-4 rounded-full text-base sm:text-lg transition-all duration-300"
-          >
-            📱 اطلب دلوقتي
-          </motion.button>
+          <Link href="/menu" className="w-full sm:w-auto">
+            <motion.button
+              whileHover={{ scale: 1.05, boxShadow: "0 0 30px rgba(249,115,22,0.5)" }}
+              whileTap={{ scale: 0.97 }}
+              className="cursor-pointer w-full bg-orange-500 hover:bg-orange-400 text-black font-bold px-10 py-4 rounded-full text-base sm:text-lg transition-colors duration-300"
+            >
+              🍽️ شوف المنيو
+            </motion.button>
+          </Link>
+          <Link href="/order" className="w-full sm:w-auto">
+            <motion.button
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.97 }}
+              className="cursor-pointer w-full bg-transparent border-2 border-orange-500 text-orange-400 hover:bg-orange-500 hover:text-black font-bold px-10 py-4 rounded-full text-base sm:text-lg transition-all duration-300"
+            >
+              📱 اطلب دلوقتي
+            </motion.button>
+          </Link>
         </motion.div>
 
         {/* إحصائيات */}

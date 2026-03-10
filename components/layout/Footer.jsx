@@ -6,11 +6,12 @@
 "use client";
 
 import { motion } from "framer-motion";
+import Link from "next/link";
 
 const QUICK_LINKS = [
-  { label: "الرئيسية",       id: "home"  },
-  { label: "المنيو",          id: "menu"  },
-  { label: "اطلب من مكانك",  id: "order" },
+  { label: "الرئيسية",       href: "/"  },
+  { label: "المنيو",          href: "/menu"  },
+  { label: "اطلب من مكانك",  href: "/order" },
 ];
 
 const CONTACT_INFO = [
@@ -20,7 +21,7 @@ const CONTACT_INFO = [
   { icon: "📧", text: "info@maximcafe.com"  },
 ];
 
-export default function Footer({ onNavigate }) {
+export default function Footer() {
   return (
     <footer className="bg-zinc-900 border-t border-zinc-800 py-12 px-4 sm:px-6">
       <div className="max-w-6xl mx-auto">
@@ -43,15 +44,16 @@ export default function Footer({ onNavigate }) {
           <div>
             <h4 className="font-black text-orange-500 mb-4">روابط سريعة</h4>
             <ul className="space-y-2 text-zinc-400 text-sm">
-              {QUICK_LINKS.map(({ label, id }) => (
-                <li key={id}>
-                  <motion.button
-                    whileHover={{ x: -4, color: "#f97316" }}
-                    onClick={() => onNavigate(id)}
-                    className="cursor-pointer transition-colors duration-200"
-                  >
-                    {label}
-                  </motion.button>
+              {QUICK_LINKS.map(({ label, href }) => (
+                <li key={href}>
+                  <Link href={href} className="inline-block">
+                    <motion.div
+                      whileHover={{ x: -4, color: "#f97316" }}
+                      className="cursor-pointer transition-colors duration-200 inline-block"
+                    >
+                      {label}
+                    </motion.div>
+                  </Link>
                 </li>
               ))}
             </ul>

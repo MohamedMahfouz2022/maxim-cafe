@@ -8,19 +8,21 @@
 
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
+import Link from "next/link";
+import { usePathname } from "next/navigation";
 
 // حذفنا "حجز طاولة" من الروابط
 const NAV_LINKS = [
-  { id: "home",  label: "الرئيسية"      },
-  { id: "menu",  label: "المنيو"         },
-  { id: "order", label: "اطلب من مكانك" },
+  { id: "/",  label: "الرئيسية"      },
+  { id: "/menu",  label: "المنيو"         },
+  { id: "/order", label: "اطلب من مكانك" },
 ];
 
-export default function Navbar({ activeSection, onNavigate }) {
+export default function Navbar() {
   const [menuOpen, setMenuOpen] = useState(false);
+  const pathname = usePathname();
 
-  const handleNav = (id) => {
-    onNavigate(id);
+  const handleClose = () => {
     setMenuOpen(false);
   };
 
@@ -34,51 +36,58 @@ export default function Navbar({ activeSection, onNavigate }) {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 py-4 flex items-center justify-between">
 
         {/* ---- الشعار ---- */}
-        <motion.button
-          whileHover={{ scale: 1.03 }}
-          whileTap={{ scale: 0.97 }}
-          onClick={() => handleNav("home")}
-          className="cursor-pointer flex items-center gap-3"
-        >
-          <div className="w-9 h-9 sm:w-10 sm:h-10 bg-orange-500 rounded-full flex items-center justify-center text-black font-black text-base sm:text-lg">
-            M
-          </div>
-          <span className="text-xl sm:text-2xl font-black text-white">
-            MAXIM <span className="text-orange-500">CAFÉ</span>
-          </span>
-        </motion.button>
+        <Link href="/" className="cursor-pointer group flex items-center gap-3" onClick={handleClose}>
+          <motion.div
+            whileHover={{ scale: 1.03 }}
+            whileTap={{ scale: 0.97 }}
+            className="flex items-center gap-3"
+          >
+            <div className="w-9 h-9 sm:w-10 sm:h-10 bg-orange-500 rounded-full flex items-center justify-center text-black font-black text-base sm:text-lg">
+              M
+            </div>
+            <span className="text-xl sm:text-2xl font-black text-white">
+              MAXIM <span className="text-orange-500">CAFÉ</span>
+            </span>
+          </motion.div>
+        </Link>
 
         {/* ---- Desktop Links ---- */}
         <div className="hidden md:flex items-center gap-6 lg:gap-8">
-          {NAV_LINKS.map((link, i) => (
-            <motion.button
-              key={link.id}
-              initial={{ opacity: 0, y: -20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.1 + i * 0.08 }}
-              whileHover={{ color: "#f97316" }}
-              onClick={() => handleNav(link.id)}
-              className={`cursor-pointer text-sm font-semibold transition-colors duration-200 ${
-                activeSection === link.id
-                  ? "text-orange-500 border-b-2 border-orange-500 pb-1"
-                  : "text-zinc-400"
-              }`}
-            >
-              {link.label}
-            </motion.button>
-          ))}
+          {NAV_LINKS.map((link, i) => {
+            const isActive = pathname === link.id || (link.id !== "/" && pathname?.startsWith(link.id));
+            return (
+              <motion.div
+                key={link.id}
+                initial={{ opacity: 0, y: -20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.1 + i * 0.08 }}
+              >
+                <Link
+                  href={link.id}
+                  className={`cursor-pointer text-sm font-semibold transition-colors duration-200 hover:text-orange-500 ${
+                    isActive
+                      ? "text-orange-500 border-b-2 border-orange-500 pb-1"
+                      : "text-zinc-400"
+                  }`}
+                >
+                  {link.label}
+                </Link>
+              </motion.div>
+            );
+          })}
         </div>
 
         {/* ---- CTA + Hamburger ---- */}
         <div className="flex items-center gap-3">
-          <motion.button
-            whileHover={{ scale: 1.07, boxShadow: "0 0 20px rgba(249,115,22,0.4)" }}
-            whileTap={{ scale: 0.95 }}
-            onClick={() => handleNav("order")}
-            className="cursor-pointer hidden sm:block bg-orange-500 hover:bg-orange-400 text-black font-bold px-4 py-2 lg:px-5 rounded-full text-sm transition-colors duration-200"
-          >
-            اطلب الآن ☕
-          </motion.button>
+          <Link href="/order" className="cursor-pointer hidden sm:block">
+            <motion.button
+              whileHover={{ scale: 1.07, boxShadow: "0 0 20px rgba(249,115,22,0.4)" }}
+              whileTap={{ scale: 0.95 }}
+              className="bg-orange-500 w-full hover:bg-orange-400 text-black font-bold px-4 py-2 lg:px-5 rounded-full text-sm transition-colors duration-200"
+            >
+              اطلب الآن ☕
+            </motion.button>
+          </Link>
 
           {/* زر الهامبرجر */}
           <button
@@ -113,25 +122,30 @@ export default function Navbar({ activeSection, onNavigate }) {
             className="md:hidden bg-zinc-950 border-t border-zinc-800 overflow-hidden"
           >
             <div className="px-4 py-4 flex flex-col gap-2">
-              {NAV_LINKS.map((link) => (
+              {NAV_LINKS.map((link) => {
+                const isActive = pathname === link.id || (link.id !== "/" && pathname?.startsWith(link.id));
+                return (
+                  <Link
+                    key={link.id}
+                    href={link.id}
+                    onClick={handleClose}
+                    className={`cursor-pointer text-right w-full py-3 px-4 rounded-xl font-semibold text-sm transition-all duration-200 block ${
+                      isActive
+                        ? "bg-orange-500/15 text-orange-400"
+                        : "text-zinc-400 hover:bg-zinc-800"
+                    }`}
+                  >
+                    {link.label}
+                  </Link>
+                );
+              })}
+              <Link href="/order" onClick={handleClose} className="block mt-1">
                 <button
-                  key={link.id}
-                  onClick={() => handleNav(link.id)}
-                  className={`cursor-pointer text-right w-full py-3 px-4 rounded-xl font-semibold text-sm transition-all duration-200 ${
-                    activeSection === link.id
-                      ? "bg-orange-500/15 text-orange-400"
-                      : "text-zinc-400 hover:bg-zinc-800"
-                  }`}
+                  className="cursor-pointer w-full bg-orange-500 hover:bg-orange-400 text-black font-bold py-3 px-4 rounded-full text-sm transition-colors duration-200"
                 >
-                  {link.label}
+                  اطلب الآن ☕
                 </button>
-              ))}
-              <button
-                onClick={() => handleNav("order")}
-                className="cursor-pointer mt-1 bg-orange-500 hover:bg-orange-400 text-black font-bold py-3 px-4 rounded-full text-sm transition-colors duration-200"
-              >
-                اطلب الآن ☕
-              </button>
+              </Link>
             </div>
           </motion.div>
         )}

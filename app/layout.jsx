@@ -4,6 +4,8 @@
 // ============================================================
 
 import { CartProvider } from "../context/CartContext";
+import Navbar from "../components/layout/Navbar";
+import Footer from "../components/layout/Footer";
 import "./globals.css";
 
 export const metadata = {
@@ -30,8 +32,12 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="ar" dir="rtl">
-      <body>
-        <CartProvider>{children}</CartProvider>
+      <body className="min-h-screen bg-zinc-950 text-white font-sans overflow-x-hidden flex flex-col">
+        <CartProvider>
+          <Navbar />
+          <main className="flex-grow">{children}</main>
+          <Footer />
+        </CartProvider>
       </body>
     </html>
   );
