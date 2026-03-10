@@ -176,7 +176,7 @@ export default function OrderFromTable() {
               transition={{ delay: 0.5 }}
               className="mt-6 text-center"
             >
-              <Link href="/menu">
+              <Link href="#menu">
                 <motion.span
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.97 }}

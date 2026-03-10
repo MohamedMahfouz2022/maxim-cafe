@@ -112,7 +112,7 @@ export default function Menu() {
             <span className="text-lg sm:text-xl font-black">
               الإجمالي: <span className="text-orange-500">{total} ج</span>
             </span>
-            <Link href="/order" className="w-full sm:w-auto">
+            <Link href="#order" className="w-full sm:w-auto">
               <motion.button
                 whileHover={{ scale: 1.05, boxShadow: "0 0 20px rgba(249,115,22,0.3)" }}
                 whileTap={{ scale: 0.97 }}

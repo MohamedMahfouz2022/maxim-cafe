@@ -1,6 +1,6 @@
 // ============================================================
 // components/layout/Footer.jsx
-// بدون "حجز طاولة"
+// بدون "حجز طاولة" — hash links للـ landing page
 // ============================================================
 
 "use client";
@@ -9,9 +9,9 @@ import { motion } from "framer-motion";
 import Link from "next/link";
 
 const QUICK_LINKS = [
-  { label: "الرئيسية",       href: "/"  },
-  { label: "المنيو",          href: "/menu"  },
-  { label: "اطلب من مكانك",  href: "/order" },
+  { label: "الرئيسية",       href: "#home"  },
+  { label: "المنيو",          href: "#menu"  },
+  { label: "اطلب من مكانك",  href: "#order" },
 ];
 
 const CONTACT_INFO = [

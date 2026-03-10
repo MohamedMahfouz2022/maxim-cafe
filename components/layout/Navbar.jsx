@@ -1,6 +1,6 @@
 // ============================================================
 // components/layout/Navbar.jsx
-// شريط التنقل — بدون "حجز طاولة"
+// شريط التنقل — Landing Page واحدة مع hash scroll
 // Framer Motion: slide down on mount + stagger links
 // ============================================================
 
@@ -9,22 +9,15 @@
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import Link from "next/link";
-import { usePathname } from "next/navigation";
 
-// حذفنا "حجز طاولة" من الروابط
 const NAV_LINKS = [
-  { id: "/",  label: "الرئيسية"      },
-  { id: "/menu",  label: "المنيو"         },
-  { id: "/order", label: "اطلب من مكانك" },
+  { href: "#home",  label: "الرئيسية" },
+  { href: "#menu",  label: "المنيو"    },
+  { href: "#order", label: "اطلب من مكانك" },
 ];
 
 export default function Navbar() {
   const [menuOpen, setMenuOpen] = useState(false);
-  const pathname = usePathname();
-
-  const handleClose = () => {
-    setMenuOpen(false);
-  };
 
   return (
     <motion.nav
@@ -36,7 +29,7 @@ export default function Navbar() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 py-4 flex items-center justify-between">
 
         {/* ---- الشعار ---- */}
-        <Link href="/" className="cursor-pointer group flex items-center gap-3" onClick={handleClose}>
+        <Link href="#home" onClick={() => setMenuOpen(false)} className="flex items-center gap-3">
           <motion.div
             whileHover={{ scale: 1.03 }}
             whileTap={{ scale: 0.97 }}
@@ -53,37 +46,30 @@ export default function Navbar() {
 
         {/* ---- Desktop Links ---- */}
         <div className="hidden md:flex items-center gap-6 lg:gap-8">
-          {NAV_LINKS.map((link, i) => {
-            const isActive = pathname === link.id || (link.id !== "/" && pathname?.startsWith(link.id));
-            return (
-              <motion.div
-                key={link.id}
-                initial={{ opacity: 0, y: -20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.1 + i * 0.08 }}
+          {NAV_LINKS.map((link, i) => (
+            <motion.div
+              key={link.href}
+              initial={{ opacity: 0, y: -20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.1 + i * 0.08 }}
+            >
+              <Link
+                href={link.href}
+                className="cursor-pointer text-sm font-semibold text-zinc-400 hover:text-orange-500 transition-colors duration-200"
               >
-                <Link
-                  href={link.id}
-                  className={`cursor-pointer text-sm font-semibold transition-colors duration-200 hover:text-orange-500 ${
-                    isActive
-                      ? "text-orange-500 border-b-2 border-orange-500 pb-1"
-                      : "text-zinc-400"
-                  }`}
-                >
-                  {link.label}
-                </Link>
-              </motion.div>
-            );
-          })}
+                {link.label}
+              </Link>
+            </motion.div>
+          ))}
         </div>
 
         {/* ---- CTA + Hamburger ---- */}
         <div className="flex items-center gap-3">
-          <Link href="/order" className="cursor-pointer hidden sm:block">
+          <Link href="#order" className="hidden sm:block">
             <motion.button
               whileHover={{ scale: 1.07, boxShadow: "0 0 20px rgba(249,115,22,0.4)" }}
               whileTap={{ scale: 0.95 }}
-              className="bg-orange-500 w-full hover:bg-orange-400 text-black font-bold px-4 py-2 lg:px-5 rounded-full text-sm transition-colors duration-200"
+              className="bg-orange-500 hover:bg-orange-400 text-black font-bold px-4 py-2 lg:px-5 rounded-full text-sm transition-colors duration-200"
             >
               اطلب الآن ☕
             </motion.button>
@@ -122,27 +108,18 @@ export default function Navbar() {
             className="md:hidden bg-zinc-950 border-t border-zinc-800 overflow-hidden"
           >
             <div className="px-4 py-4 flex flex-col gap-2">
-              {NAV_LINKS.map((link) => {
-                const isActive = pathname === link.id || (link.id !== "/" && pathname?.startsWith(link.id));
-                return (
-                  <Link
-                    key={link.id}
-                    href={link.id}
-                    onClick={handleClose}
-                    className={`cursor-pointer text-right w-full py-3 px-4 rounded-xl font-semibold text-sm transition-all duration-200 block ${
-                      isActive
-                        ? "bg-orange-500/15 text-orange-400"
-                        : "text-zinc-400 hover:bg-zinc-800"
-                    }`}
-                  >
-                    {link.label}
-                  </Link>
-                );
-              })}
-              <Link href="/order" onClick={handleClose} className="block mt-1">
-                <button
-                  className="cursor-pointer w-full bg-orange-500 hover:bg-orange-400 text-black font-bold py-3 px-4 rounded-full text-sm transition-colors duration-200"
+              {NAV_LINKS.map((link) => (
+                <Link
+                  key={link.href}
+                  href={link.href}
+                  onClick={() => setMenuOpen(false)}
+                  className="text-right w-full py-3 px-4 rounded-xl font-semibold text-sm text-zinc-400 hover:bg-zinc-800 hover:text-orange-400 transition-all duration-200 block"
                 >
+                  {link.label}
+                </Link>
+              ))}
+              <Link href="#order" onClick={() => setMenuOpen(false)} className="block mt-1">
+                <button className="cursor-pointer w-full bg-orange-500 hover:bg-orange-400 text-black font-bold py-3 px-4 rounded-full text-sm transition-colors duration-200">
                   اطلب الآن ☕
                 </button>
               </Link>
