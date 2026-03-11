@@ -28,7 +28,7 @@ export default function Hero() {
   return (
     <section
       id="home"
-      className="relative min-h-screen flex items-center justify-center pt-20 overflow-hidden bg-zinc-950 text-white"
+      className="relative min-h-screen flex items-center justify-center lg:pt-20 overflow-hidden bg-zinc-950 text-white"
     >
       {/* ---- خلفية ---- */}
       <div className="absolute inset-0 pointer-events-none">
@@ -56,7 +56,7 @@ export default function Hero() {
         variants={containerVariants}
         initial="hidden"
         animate="visible"
-        className="relative z-10 text-center px-4 sm:px-6 max-w-4xl mx-auto"
+        className="relative z-10 text-center px-4 sm:px-6 max-w-4xl mx-auto "
       >
         {/* شارة "مفتوح الآن" */}
         <motion.div
